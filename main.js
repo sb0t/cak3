@@ -8,9 +8,18 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+dirLight.position.set(5, 5, 5);
+scene.add(dirLight);
+
+let cakeModel;
 const loader = new GLTFLoader();
-loader.load('./assets/scene.gltf', (gltfScene) => {
-    scene.add(gltfScene.scene);
+loader.load('./assets/scene.gltf', (gltf) => {
+    model = gltf.scene;
+    model.scale.set(1, 1, 1);
+    model.position.set(0, 0, 0);
+    scene.add(model);
 });
 
 // CUBE
@@ -21,10 +30,11 @@ const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 */
 
-camera.position.z = 5;
+camera.position.z = 10;
 
 function animate() {
-    cube.rotation.x += 0.01;
+    // cube.rotation.x += 0.01;
+    model.rotation.x += 0.01;
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
