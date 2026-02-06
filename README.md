@@ -1,4 +1,4 @@
-# CAK3
+# CAK3
 
 A cake implemented via ThreeJS.
 

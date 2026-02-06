@@ -5,3 +5,11 @@ body {
 h1 {
     text-align: center;
 }
+#info {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  display:block;
+}
