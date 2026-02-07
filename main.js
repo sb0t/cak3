@@ -13,7 +13,7 @@ const dirLight = new THREE.DirectionalLight(0xffffff, 1);
 dirLight.position.set(5, 5, 5);
 scene.add(dirLight);
 
-let cakeModel;
+let model;
 const loader = new GLTFLoader();
 loader.load('./assets/scene.gltf', (gltf) => {
     model = gltf.scene;
