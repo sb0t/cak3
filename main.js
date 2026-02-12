@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/DRACOLoader.js';
 gsap.registerPlugin(ScrollTrigger);
 
 function createSection(trigger, extra = {}) {
@@ -50,12 +51,6 @@ dir3.position.set(9, -6, 0);
 dirLights.add(dir1, dir2, dir3);
 scene.add(dirLights);
 
-function garbo(obj) {
-    scene.remove(obj);
-    if(obj.geometry) obj.geometry.dispose();
-    obj.material.dispose();
-}
-
 const ribbonGroup = new THREE.Group();
 scene.add(ribbonGroup);
 const L = 10;
@@ -84,10 +79,45 @@ ribbonPieces.forEach(p => {
     p.scale.set(1, 0.001, 1);
 });
 
-const modLoader = new GLTFLoader();
+const loadingManager = new THREE.LoadingManager();
+
+const overlayObj = document.querySelector('.overlay');
+const blockObj = document.querySelector('.block');
+const progressBar = document.querySelector('.progress-bg');
+const progressFill = document.querySelector('.progress-fill');
+
+loadingManager.onStart = () => {
+    overlayObj.classList.toggle('hide');
+    progressBar.classList.toggle('hide');
+};
+loadingManager.onProgress = () => {
+    let width = 1;
+    let id = setInterval(frame, 10);
+    function frame() {
+        if(width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            progressFill.style.width = width + "%";
+            progressFill.textContent = width + "%";
+        }
+    }
+};
+loadingManager.onLoad = () => {
+    overlayObj.classList.toggle('hide');
+    blockObj.classList.toggle('block');
+    progressBar.classList.toggle('hide');
+};
+
+const modLoader = new GLTFLoader(loadingManager);
+
+const dLoader = new DRACOLoader();
+dLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+dLoader.setDecoderConfig({type: 'js'});
+modLoader.setDRACOLoader(dLoader);
 
 let balloonModel;
-modLoader.load('assets/balloon/balloon_numbers.gltf', (gltf) => {
+modLoader.load('assets/balloon/balloon_numbers.glb', (gltf) => {
     balloonModel = gltf.scene;
     balloonModel.position.set(0.04, -0.5, -0.7);
     scene.add(balloonModel);
