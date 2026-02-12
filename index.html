@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>CAK3</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://use.typekit.net/shs8uij.css">
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
         <script type="importmap">
@@ -17,13 +18,61 @@
     <body>
         <div id="scroll">
             <div id="scene">
-                <section>
+                <!--Box (Cake Enters)-->
+                <section id="box-1">
                     <div id="ribbon"></div>
-                    <div id="lflap"></div>
+                    <div id="mflap"></div>
+                    <div id="lflap"><img src="assets/box/wrap/sticker.png" id="sticker"></div>
                     <div id="rflap"></div>
                 </section>
-                <section></section>
-                <section></section>
+                <!--Cake-->
+                <section id="cake-2"></section>
+                <!--Cake to Memory-->
+                <section id="out-3"></section>
+                <!--Memory-->
+                <section id="mems-4">
+                    <div id="rmem1">
+                        <figure class="orton-effect">
+                            <img src="/assets/mems/mem1.jpeg">
+                            <img src="/assets/mems/mem1.jpeg" aria-hidden="true">
+                        </figure>
+                    </div>
+                    <div id="lmem">
+                        <figure class="orton-effect">
+                            <img src="assets/mems/mem2.jpeg">
+                            <img src="assets/mems/mem2.jpeg" aria-hidden="true">
+                            <figcaption>March</figcaption>
+                        </figure>
+                    </div>
+                    <div id="rmem2">
+                        <figure class="orton-effect">
+                            <img src="assets/mems/mem3.jpeg">
+                            <img src="assets/mems/mem3.jpeg" aria-hidden="true">
+                            <figcaption>April</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!--Memory to Letter-->
+                <section id="out-5"></section>
+                <!--Letter-->
+                <section id="letter-6">
+                    <div class="container">
+                        <div class="envelope-wrapper flap">
+                            <div class="envelope">
+                                <div class="letter">
+                                    <div class="text">
+                                        <h1>Ciao Mamma,</h2>
+                                        <p>
+                                            Grazie per tutto quello che fai per me. Scusa se non te lo ricordo abbastanza.
+                                        </p>
+                                        <h1>tvb, Stefano (:</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="heart"></div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
         <canvas id="bg"></canvas>
